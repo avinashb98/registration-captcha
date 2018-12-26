@@ -1,7 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-require('dotenv').config();
-
+const registerRoute = require('./src/routes/register');
 // mongodb config
 require('./config/db');
 
@@ -27,5 +27,7 @@ app.get('/api/', (req, res) => {
     msg: 'Register as a new user'
   });
 });
+
+app.use('/api/register/', registerRoute);
 
 module.exports = app;
