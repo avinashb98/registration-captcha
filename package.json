@@ -1,0 +1,31 @@
+{
+  "name": "registration-captcha",
+  "version": "1.0.0",
+  "description": "Captcha Protected Registration Form",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avinashb98/registration-captcha.git"
+  },
+  "author": "Avinash Bhardwaj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/avinashb98/registration-captcha/issues"
+  },
+  "homepage": "https://github.com/avinashb98/registration-captcha#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.11.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
