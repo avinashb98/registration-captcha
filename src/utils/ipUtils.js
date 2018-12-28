@@ -21,6 +21,21 @@ const updateIpRegCount = async (address) => {
   }
 };
 
+const isIpSafe = async (address) => {
+  let ip;
+  try {
+    ip = await IP.findOne({ address });
+  } catch (error) {
+    throw error;
+  }
+  if (!ip || ip.registrationCount < 3) {
+    return true;
+  }
+
+  return false;
+};
+
 module.exports = {
-  updateIpRegCount
+  updateIpRegCount,
+  isIpSafe
 };

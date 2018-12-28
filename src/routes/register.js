@@ -4,6 +4,11 @@ const validator = require('../controllers/validator');
 
 const router = express.Router();
 
-router.post('/', validator.register, registerController.register);
+router.post(
+  '/',
+  validator.register,
+  registerController.safetyCheckIP,
+  registerController.register
+);
 
 module.exports = router;

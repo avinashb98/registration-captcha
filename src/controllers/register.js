@@ -27,6 +27,26 @@ const register = async (req, res) => {
   }
 };
 
+const safetyCheckIP = async (req, res, next) => {
+  const address = req.connection.remoteAddress;
+  let isSafe;
+  try {
+    isSafe = await ipUtils.isIpSafe(address);
+  } catch (error) {
+    console.log(error);
+    isSafe = false;
+  }
+
+  if (!isSafe) {
+    res.status(401).json({
+      message: 'Please include Captcha Code in your request'
+    });
+    return;
+  }
+  next();
+};
+
 module.exports = {
-  register
+  register,
+  safetyCheckIP
 };
