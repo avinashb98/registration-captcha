@@ -3,6 +3,7 @@
   "rules": {
     "comma-dangle": "off",
     "no-underscore-dangle": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "no-useless-escape": "off"
   }
 }
