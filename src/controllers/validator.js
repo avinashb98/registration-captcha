@@ -20,7 +20,8 @@ const ValidateRegister = Joi.object().keys({
   email: Joi
     .string()
     .regex(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/)
-    .required()
+    .required(),
+  captchaCode: Joi.string()
 }).with('email', 'password');
 
 const register = async (req, res, next) => {
