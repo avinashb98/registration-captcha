@@ -1,15 +1,30 @@
 const Joi = require('joi');
+const User = require('../models/user');
+
+const userWithEmailExists = async (email) => {
+  let user;
+  try {
+    user = await User.find({ email });
+  } catch (error) {
+    throw error;
+  }
+  console.log(user);
+  if (user.length > 0) {
+    return true;
+  }
+  return false;
+};
 
 const ValidateRegister = Joi.object().keys({
-  username: Joi.string().alphanum().min(3).max(30),
+  name: Joi.string().min(3).max(30),
   password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
   email: Joi
     .string()
     .regex(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/)
     .required()
-}).with('username', 'password');
+}).with('email', 'password');
 
-const register = (req, res, next) => {
+const register = async (req, res, next) => {
   const { error, value } = ValidateRegister.validate(req.body);
   if (error) {
     console.log(error);
@@ -17,8 +32,15 @@ const register = (req, res, next) => {
       message: 'Invalid input'
     });
     return;
-    // next(new Error('Inputs do not meet criteria'));
   }
+
+  if (await userWithEmailExists(value.email)) {
+    res.status(400).json({
+      message: 'User with this email already exists'
+    });
+    return;
+  }
+
   req.parsed = value;
   next();
 };
