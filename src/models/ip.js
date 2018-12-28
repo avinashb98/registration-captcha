@@ -10,7 +10,7 @@ const IpSchema = new Schema({
   },
   registrationCount: {
     type: Number,
-    default: 0
+    default: 1
   },
   createdAt: {
     type: Date,
