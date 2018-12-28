@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 const register = async (req, res) => {
-  const { email, name, password } = req.body;
+  const { email, name, password } = req.parsed;
   try {
     await User.create({ email, name, password });
   } catch (error) {

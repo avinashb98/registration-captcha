@@ -8,7 +8,6 @@ const userWithEmailExists = async (email) => {
   } catch (error) {
     throw error;
   }
-  console.log(user);
   if (user.length > 0) {
     return true;
   }
