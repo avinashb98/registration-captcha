@@ -36,6 +36,9 @@ export class AppComponent {
             if (errorResp.error.message === 'Please include Captcha Code in your request') {
               this.safe = false;
             }
+            if (errorResp.error.message === 'User with this email already exists') {
+              alert('Email Already Exists');
+            }
           }
         );
     } else {
@@ -44,7 +47,6 @@ export class AppComponent {
   }
   resolved(captchaResponse: string) {
     this.user.captchaCode = captchaResponse;
-    console.log(`Resolved captcha with response ${captchaResponse}:`);
   }
 
   validName(name) {
@@ -55,7 +57,7 @@ export class AppComponent {
     );
   }
   validPassword(password) {
-    const regularExpression = /^[a-zA-Z0-9]{3,30}$/;
+    const regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     return regularExpression.test(password);
   }
   validEmail(email) {

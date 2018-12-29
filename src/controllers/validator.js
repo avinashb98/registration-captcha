@@ -16,7 +16,7 @@ const userWithEmailExists = async (email) => {
 
 const ValidateRegister = Joi.object().keys({
   name: Joi.string().min(3).max(30),
-  password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+  password: Joi.string().regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/).required(),
   email: Joi
     .string()
     .regex(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/)
