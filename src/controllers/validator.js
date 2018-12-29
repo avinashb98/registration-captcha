@@ -21,27 +21,27 @@ const ValidateRegister = Joi.object().keys({
     .string()
     .regex(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/)
     .required(),
-  captchaCode: Joi.string()
+  captchaCode: Joi.string().empty()
 }).with('email', 'password');
 
 const register = async (req, res, next) => {
-  const { error, value } = ValidateRegister.validate(req.body);
-  if (error) {
-    console.log(error);
-    res.status(400).json({
-      message: 'Invalid input'
-    });
-    return;
-  }
+  // const { error, value } = ValidateRegister.validate(req.body);
+  // if (error) {
+  //   console.log(error);
+  //   res.status(400).json({
+  //     message: 'Invalid input'
+  //   });
+  //   return;
+  // }
 
-  if (await userWithEmailExists(value.email)) {
-    res.status(400).json({
-      message: 'User with this email already exists'
-    });
-    return;
-  }
+  // if (await userWithEmailExists(value.email)) {
+  //   res.status(400).json({
+  //     message: 'User with this email already exists'
+  //   });
+  //   return;
+  // }
 
-  req.parsed = value;
+  req.parsed = req.body;
   next();
 };
 

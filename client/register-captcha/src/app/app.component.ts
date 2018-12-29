@@ -10,7 +10,8 @@ export class AppComponent {
   user = {
     name: '',
     email: '',
-    password: ''
+    password: '',
+    captchaCode: ''
   };
 
   constructor(private registerService: RegisterService) { }
@@ -31,6 +32,7 @@ export class AppComponent {
             }
           },
           errorResp => {
+            console.log(errorResp);
             if (errorResp.error.message === 'Please include Captcha Code in your request') {
               this.safe = false;
             }
@@ -39,6 +41,10 @@ export class AppComponent {
     } else {
       alert('Inputs not valid. Please check again');
     }
+  }
+  resolved(captchaResponse: string) {
+    this.user.captchaCode = captchaResponse;
+    console.log(`Resolved captcha with response ${captchaResponse}:`);
   }
 
   validName(name) {

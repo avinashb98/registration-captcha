@@ -17,8 +17,6 @@
     </div>
     <input [(ngModel)]="user.password" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
   </div>
-  <div class="captcha" *ngIf="!safe">
-    captcha
-  </div>
+  <re-captcha *ngIf="!safe" (resolved)="resolved($event)" siteKey="6LfGiIUUAAAAADB0JTFA3dmGL3RG8BpUrNRnS0WU"></re-captcha>
   <button class="btn btn-primary" (click)="register()">Submit</button>
 </div>

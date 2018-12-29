@@ -8,6 +8,7 @@ router.post(
   '/',
   validator.register,
   registerController.safetyCheckIP,
+  registerController.verifyCaptcha,
   registerController.register
 );
 

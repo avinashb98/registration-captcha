@@ -1,3 +1,4 @@
+const axios = require('axios');
 const User = require('../models/user');
 const ipUtils = require('../utils/ipUtils');
 
@@ -43,25 +44,38 @@ const safetyCheckIP = async (req, res, next) => {
     });
     return;
   }
+  req.isSafe = true;
   next();
 };
 
 const verifyCaptcha = async (req, res, next) => {
-  const { captchaCode } = req.parsed;
-  if (!captchaCode) {
+  if (req.isSafe) {
     next();
     return;
   }
-  const verified = false;
-  console.log('Verifying Captcha');
 
-  if (!verified) {
-    res.status(401).json({
-      message: 'Invalid Captcha'
+  const { captchaCode } = req.parsed;
+
+  const url = 'https://www.google.com/recaptcha/api/siteverify';
+  const data = {
+    secret: process.env.SECRET,
+    response: captchaCode
+  };
+
+  axios({
+    method: 'POST',
+    url,
+    params: data
+  })
+    .then((response) => {
+      if (!response.data.success) {
+        res.status(401).json({
+          message: 'Invalid Captcha Code'
+        });
+        return;
+      }
+      next();
     });
-    return;
-  }
-  next();
 };
 
 module.exports = {
