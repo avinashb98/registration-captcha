@@ -37,7 +37,7 @@ const safetyCheckIP = async (req, res, next) => {
     isSafe = false;
   }
 
-  if (!isSafe) {
+  if (!isSafe && !req.parsed.captchaCode) {
     res.status(401).json({
       message: 'Please include Captcha Code in your request'
     });
@@ -46,7 +46,26 @@ const safetyCheckIP = async (req, res, next) => {
   next();
 };
 
+const verifyCaptcha = async (req, res, next) => {
+  const { captchaCode } = req.parsed;
+  if (!captchaCode) {
+    next();
+    return;
+  }
+  const verified = false;
+  console.log('Verifying Captcha');
+
+  if (!verified) {
+    res.status(401).json({
+      message: 'Invalid Captcha'
+    });
+    return;
+  }
+  next();
+};
+
 module.exports = {
   register,
-  safetyCheckIP
+  safetyCheckIP,
+  verifyCaptcha
 };
