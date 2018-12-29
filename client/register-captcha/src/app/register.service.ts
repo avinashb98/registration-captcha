@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RegisterService {
 
-  private baseUrl = 'http://localhost:3000/api';
+  private baseUrl = 'http://calm-refuge-89560.herokuapp.com/api';
 
   constructor(private http: HttpClient) { }
 
