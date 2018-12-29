@@ -10,7 +10,6 @@ require('./config/db');
 // Initializing express app
 const app = express();
 
-
 app.use(cors());
 
 // Body Parser Configuration
