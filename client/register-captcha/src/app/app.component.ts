@@ -27,8 +27,7 @@ export class AppComponent {
               this.user.name = '';
               this.user.email = '';
               this.user.password = '';
-            } else {
-              alert(data.message);
+              this.safe = true;
             }
           },
           errorResp => {
