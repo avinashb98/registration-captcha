@@ -26,4 +26,4 @@ UserSchema.post('save', () => {
   data.lastUpdateAt = new Date();
 });
 
-module.exports = mongoose.model('Message', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
