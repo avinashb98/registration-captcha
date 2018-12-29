@@ -6,4 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  safe = true;
+  user = {
+    name: '',
+    email: '',
+    password: ''
+  };
+  register() {
+    console.log(this.user);
+  }
 }
